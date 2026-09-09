@@ -9,16 +9,6 @@ Projeto de montagem de um carrinho robótico 2WD (duas rodas motorizadas + roda 
 
 **Laboratório:** Project Maker Lab
 
-## Status atual
-
-- [x] Definição dos requisitos e componentes
-- [x] Croqui do chassi
-- [x] Carenagem esférica modelada e impressa (base + tampa, encaixe por pressão)
-- [x] Chassi interno em madeira (corte a laser) definido
-- [ ] Montagem eletrônica completa (ESP32 + L298N + motores)
-- [ ] Programação do controle dos motores
-- [ ] Testes de locomoção
-
 
 ## Componentes principais
 
@@ -33,4 +23,3 @@ Projeto de montagem de um carrinho robótico 2WD (duas rodas motorizadas + roda 
 
 ---
 
-*Documentação em construção — próximas atualizações incluirão o esquema elétrico e o firmware.*
