@@ -1,4 +1,4 @@
-# Projeto Carrinho — Carrinho Robótico "Pokébola"
+# Projeto Carrinho — Carrinho"Pokébola"
 
 Projeto de montagem de um carrinho robótico 2WD (duas rodas motorizadas + roda boba), com carenagem esférica impressa em 3D no estilo pokébola.
 
