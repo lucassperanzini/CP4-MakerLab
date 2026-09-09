@@ -4,8 +4,8 @@ Projeto de montagem de um carrinho robótico 2WD (duas rodas motorizadas + roda 
 
 ## Equipe
 
-- Lucas
-- João
+- Lucas Pisaneschi Speranzini RM98297
+- João Pedro de Souza Vieira RM99805
 
 **Laboratório:** Project Maker Lab
 
@@ -19,10 +19,6 @@ Projeto de montagem de um carrinho robótico 2WD (duas rodas motorizadas + roda 
 - [ ] Programação do controle dos motores
 - [ ] Testes de locomoção
 
-## Documentação
-
-- [Ficha de Requisitos](./docs/ficha-requisitos.md)
-- [Croqui do chassi](./docs/croqui-chassi.png)
 
 ## Componentes principais
 
