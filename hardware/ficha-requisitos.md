@@ -2,7 +2,8 @@
 
 **Projeto:** Carrinho
 **Equipe:** Lucas, João
-**Laboratório/Curso:** Project Maker Lab
+**Turma** 4ESPY
+**Disciplina:** Project Maker Lab
 
 ---
 
@@ -36,6 +37,7 @@
 | ESP32 | Controlador principal (lógica, comunicação) |
 | Módulo driver L298N | Aciona os motores (ponte H), recebe sinal do ESP32 e energia da bateria |
 | Suporte de pilhas | Alimentação do sistema |
+| Sensor de Distância | 
 
 ## 4. Posição dos componentes
 
