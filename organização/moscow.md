@@ -12,8 +12,6 @@
 | **Could have** | Indicador visual (LED) de status (ligado/bateria baixa) | Boa prática de UX, mas dispensável |
 | **Could have** | Ajuste fino de velocidade via PWM (controle de aceleração suave) | Melhoria de qualidade de movimento |
 | **Could have** | Pintura/acabamento estético fiel às cores da pokébola | Estética, não afeta funcionamento |
-| **Won't have (por ora)** | Sensor ultrassônico / desvio de obstáculo | Fora do escopo definido para esta entrega |
-| **Won't have (por ora)** | Controle por aplicativo dedicado (app mobile) | Complexidade alta, sem tempo hábil |
 | **Won't have (por ora)** | Recarga automática / base de carregamento | Fora do escopo |
 | **Won't have (por ora)** | Câmera ou sensores de visão | Fora do escopo |
 
