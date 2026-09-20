@@ -1,6 +1,5 @@
 # Kanban
 
-Snapshot do quadro na data desta entrega. Recomendamos recriar isso como um **GitHub Projects** (aba "Projects" do repositório) para ficar interativo — este arquivo é o ponto de partida com o estado atual.
 
 | 📋 A Fazer | 🔶 Em Andamento | ✅ Concluído |
 |---|---|---|
