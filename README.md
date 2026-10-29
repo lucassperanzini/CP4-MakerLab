@@ -2,12 +2,12 @@
 
 > Evolução do carrinho do CP1 (BLE + sensor ultrassônico de ré + motores + buzzer). Não foi construído um carrinho novo.
 
-**Integrantes (nome — RM):**
-- _preencher_
+**Integrantes:**
+- João 
+- Lucas
 
 **Ciclo:** COLETAR → TREINAR → TESTAR → EMBARCAR → INFERIR → AGIR
 
-> **Aviso sobre os dados:** o dataset deste CP2 é **simulado** (gerado por script, ver seção 3). Ele **não** foi coletado com o sensor do carrinho. Já na inferência, o modelo recebe leituras **reais** do ultrassônico, em tempo real, no ESP32.
 
 ## 1. Ideia do projeto
 
@@ -66,7 +66,7 @@ CP4-MakerLab-main/
     └── Fusion.md
 ```
 
-## 3. Dataset e coleta de dados (10 pts)
+## 3. Dataset e coleta de dados 
 
 - **Sensor:** HC-SR04 (ultrassônico), na **traseira** do carrinho (TRIG=5, ECHO=4).
 - **Dado:** distância em cm (1 eixo, `distancia`) com `timestamp` em ms, a **20 Hz** (uma leitura a cada 50 ms); sem eco = 200 cm.
@@ -86,7 +86,7 @@ CP4-MakerLab-main/
 
 **Limitação:** um modelo treinado só com dados simulados pode errar com o sensor real, porque o ruído, o eco e a vibração dos motores reais são diferentes. Os parâmetros do firmware (`LIMIAR_CONF`, `PASSO_FATOR`, `FATOR_MIN`) permitem ajustar o comportamento. O fluxo de coleta real está pronto (`coletar_dados.ino` + `coletar_csv.py`) e, com ele, o modelo pode ser retreinado sem mudar o firmware.
 
-## 4. Projeto no Edge Impulse (15 pts)
+## 4. Projeto no Edge Impulse 
 
 1. **Importação:** *Data acquisition → Add data → Upload existing data*; selecionar os 72 CSVs; *Label: infer from filename*; *Category: automatically split between training and testing* (~80/20). No assistente de CSV: série temporal, coluna `timestamp` em ms, valor = `distancia`, frequência 20 Hz.
 2. **Divisão dos dados:** treino ____ % / teste ____ % (preencher conforme o painel).
@@ -101,7 +101,7 @@ CP4-MakerLab-main/
 
 Prints em `edge_impulse/`: `01_dados.png`, `02_impulse.png`, `03_treino.png`, `04_matriz_confusao.png`, `05_teste.png`.
 
-## 5. Integração com o ESP32 (10 pts)
+## 5. Integração com o ESP32
 
 1. Arduino IDE → *Sketch → Include Library → Add .ZIP Library* (zip exportado).
 2. O `carrinho_tinyml.ino` já inclui a biblioteca do projeto: `#include <JPSV-project-1_inferencing.h>`.
@@ -136,29 +136,4 @@ d= 80.0 cm | est=0.03 suave=0.02 brusca=0.95 | acao=EMERGENCIA | vel=88%
 ### Verificação da lógica
 A lógica de ação do firmware foi compilada e executada no PC, com relógio simulado e um carro simulado em malha fechada (a distância depende do PWM aplicado). Testes: ré a 40, 15 e 6 cm/s contra uma parede (100% a 30 cm, cerca de 72% a 15 cm, fuga para frente a 5 cm) e obstáculo se aproximando rápido com o carrinho indo para frente, curvando ou parado (nenhuma ação). Isso valida a máquina de estados, não o modelo treinado nem o hardware.
 
-## 6. Evolução CP1 → CP2 (5 pts)
 
-Um commit por etapa, **sem substituir** os arquivos do CP1:
-```
-git add CP2_TinyML/README.md
-git commit -m "CP2: define projeto TinyML (classificador de tipo de aproximação)"
-git add CP2_TinyML/firmware/coleta_dados CP2_TinyML/scripts/coletar_csv.py
-git commit -m "CP2: firmware e script de coleta de dados do ultrassônico"
-git add CP2_TinyML/scripts/gerar_dataset_simulado.py CP2_TinyML/dataset_simulado
-git commit -m "CP2: gerador e dataset simulado (estatico, suave, brusca)"
-git add CP2_TinyML/edge_impulse
-git commit -m "CP2: projeto Edge Impulse, treinamento e matriz de confusão"
-git add CP2_TinyML/lib
-git commit -m "CP2: biblioteca exportada do Edge Impulse"
-git add CP2_TinyML/firmware/carrinho_tinyml
-git commit -m "CP2: integra inferência ao firmware do carrinho"
-git add CP2_TinyML/evidencias
-git commit -m "CP2: testes no carrinho e evidências da demonstração"
-```
-
-## 7. Demonstração (60%)
-
-- **Sensor:** Serial Monitor mostrando `d=` em cm, vindo do HC-SR04 real.
-- **Inferência:** probabilidades das 3 classes a cada 50 ms, calculadas no ESP32.
-- **Interação:** (a) de ré, obstáculo a 30 cm → nada; (b) de ré, a 15 cm → velocidade cai; (c) de ré, a 5 cm → freio + buzzer + vai para frente por 1 s; (d) andando para frente ou curvando, com obstáculo a qualquer distância → nada.
-- Link do vídeo: _preencher_
