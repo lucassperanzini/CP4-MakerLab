@@ -31,20 +31,39 @@ O ultrassônico (traseiro) mede a distância a 20 Hz. O modelo recebe as **últi
 
 ## 2. Estrutura do repositório
 
-```
-CP1/                                  # versão original (mantida; não apagar)
-CP2_TinyML/
+```text
+CP4-MakerLab-main/
 ├── README.md
-├── firmware/
-│   ├── coleta_dados/coletar_dados.ino        # envia "timestamp,distancia" a 20 Hz
-│   └── carrinho_tinyml/carrinho_tinyml.ino   # firmware final (BLE + inferência + ação)
-├── scripts/
-│   ├── coletar_csv.py                        # gravador de CSV via serial (coleta real)
-│   └── gerar_dataset_simulado.py             # gerador do dataset simulado (semente 42)
-├── dataset_simulado/                         # 72 CSVs (3 classes)
-├── edge_impulse/                             # prints (dados, impulse, treino, matriz, teste)
-├── lib/                                      # .zip da biblioteca exportada do Edge Impulse
-└── evidencias/                               # fotos/vídeo da demonstração
+├── Vídeo do WhatsApp 2026-10-28 às 23:09:41.mp4
+├── croqui-chassi.png
+├── hardware/
+│   ├── ficha-requisitos.md
+│   ├── lista-componentes.md
+│   ├── mudancas-estrutura-chassi.md
+│   ├── conexoes-eletronicas.png
+│   └── diagrama-alimentacao.png
+├── organização/
+│   ├── README.md
+│   ├── mvp.md
+│   ├── moscow.md
+│   ├── backlog.md
+│   ├── dependencias.md
+│   ├── kanban.md
+│   └── planilha-custos.xlsx
+├── src/
+│   └── Carrinho/
+│       ├── Carrinho.ino
+│       ├── carrinho_tinyml/
+│       │   └── carrinho_tinyml.ino
+│       ├── fireRed.ino
+│       ├── fireRedIntro.ino
+│       ├── hobbits.ino
+│       └── musica.ino
+└── stl/
+    ├── baixo.stl
+    ├── cima.stl
+    ├── Centro.stl
+    └── Fusion.md
 ```
 
 ## 3. Dataset e coleta de dados (10 pts)
