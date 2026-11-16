@@ -1,13 +1,19 @@
 #include <BLEDevice.h>
 #include <BLEUtils.h>
 #include <BLEServer.h>
+#include <BLE2902.h>
 #include <esp_mac.h>
-
+#include <DHT.h>
 // Definição dos pinos do sensor ultrassônico e LED
 #define TRIG_PIN 5
 #define ECHO_PIN 4
 #define BUZZER_PIN 18  // Pino do Buzzer
 #define LED 2          // Pino do LED azul integrado
+
+#define DHTPIN 19      // Pino de dados do DHT11
+#define DHTTYPE DHT11  // Modelo do sensor
+
+DHT dht(DHTPIN, DHTTYPE);
 
 // =========================================================================
 // MAPEAMENTO DOS PINOS DOS MOTORES
@@ -25,6 +31,13 @@ bool movimentoLiberado = false;
 
 int VEL_RETA  = 220;          // 0 a 255
 int VEL_CURVA = 140;
+
+
+float temperatura = 0.0;
+float umidade = 0.0;
+
+unsigned long ultimaLeituraDHT = 0;
+const unsigned long INTERVALO_DHT = 5000; // 2000 ms = 2 segundos
 
 // Variáveis para controle de tempo ao soltar o botão
 volatile unsigned long ultimoComandoTempo = 0;
@@ -123,6 +136,7 @@ class MyCallbacks: public BLECharacteristicCallbacks {
 void setup() {
   Serial.begin(115200);
   delay(500);           
+
   
   pinMode(LED, OUTPUT);           
   pinMode(TRIG_PIN, OUTPUT);    
@@ -134,15 +148,20 @@ void setup() {
   
   parar(); 
 
+  dht.begin();
+
   BLEDevice::init("ESP32_iPhone");
   BLEServer *pServer = BLEDevice::createServer();
 
   BLEService *pService = pServer->createService(SERVICE_UUID);
-  pCharacteristic = pService->createCharacteristic(
-                      CHARACTERISTIC_UUID,
-                      BLECharacteristic::PROPERTY_READ |
-                      BLECharacteristic::PROPERTY_WRITE
-                    );
+pCharacteristic = pService->createCharacteristic(
+                    CHARACTERISTIC_UUID,
+                    BLECharacteristic::PROPERTY_READ |
+                    BLECharacteristic::PROPERTY_WRITE |
+                    BLECharacteristic::PROPERTY_NOTIFY
+                  );
+
+pCharacteristic->addDescriptor(new BLE2902());
 
   pCharacteristic->setCallbacks(new MyCallbacks());
   pService->start();
@@ -187,6 +206,31 @@ void loop() {
     }
   }
 
+
+if (millis() - ultimaLeituraDHT >= INTERVALO_DHT) {
+  
+    ultimaLeituraDHT = millis();
+    float h = dht.readHumidity();
+    float t = dht.readTemperature();
+
+    if (!isnan(h) && !isnan(t)) {
+      umidade = h;
+      temperatura = t;
+
+      Serial.print("Temp: ");
+      Serial.print(temperatura, 1);
+      Serial.print(" °C | Umidade: ");
+      Serial.print(umidade, 0);
+      Serial.println(" %");
+
+      // Envia via BLE com \n no final
+      String dadosSensor = "T:" + String(temperatura, 1) + "C H:" + String(umidade, 0) + "%\n";
+      pCharacteristic->setValue(dadosSensor.c_str());
+      pCharacteristic->notify();
+    } else {
+      Serial.println("Falha ao ler o sensor DHT11!");
+    }
+  }
   // =========================================================================
   // LEITURA DO SENSOR ULTRASSÔNICO
   // =========================================================================
