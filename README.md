@@ -297,18 +297,10 @@ Acenda um isqueiro a 5–10 cm do DHT11 (**nunca na chama**: o sensor é de plá
         └── dados/                          # CSVs do DHT11
 ```
 
-## 10. Organização do projeto
+## 10. Vídeo 
 
-- [MVP](./organização/mvp.md) · [MoSCoW](./organização/moscow.md) · [Backlog](./organização/backlog.md) · [Dependências](./organização/dependencias.md) · [Kanban](./organização/kanban.md)
-- [Planilha de custos](./organização/planilha-custos.xlsx)
 
-## 11. Limitações e próximos passos
-
-- **Dados:** o modelo 1 foi treinado com dados simulados; o modelo 2 com [dados reais / sintéticos: AJUSTE]. Em ambos, o desempenho com o sensor real pode ser menor que o medido no treino.
-- O DHT11 responde devagar, tem resolução baixa e erro de ±2 °C; por isso a janela é de 10 s e o alarme leva alguns segundos.
-- O modelo 2 aprende os valores do ambiente de coleta; em outro local (temperatura-base diferente) é preciso recoletar e retreinar.
-- A fonte de calor testada foi um isqueiro a curta distância; não é um detector de incêndio certificado.
-- Próximos passos: sensor de fumaça/gás (MQ-2) como entrada adicional, enviar o alerta de calor ao celular por BLE e unificar os dois modelos num único impulse (multi-impulse).
+https://youtu.be/rU7TP_PfrPA
 
 ## 12. Referências
 
